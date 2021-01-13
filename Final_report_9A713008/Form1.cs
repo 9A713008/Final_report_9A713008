@@ -20,6 +20,14 @@ namespace Final_report_9A713008
         {
             InitializeComponent();
         }
+        public class resp
+        {
+            public List<img> data { get; set; }
+        }
+        public class img
+        {
+            public string link { get; set; }
+        }
         private resp GetImages(string albumHash, string clientId)
         {
             resp result = null;
@@ -55,7 +63,14 @@ namespace Final_report_9A713008
                 return;
             }
             // download 一張照片下來  
-            pB1.Image = m;
+            string url = m.data[12].link;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream receiveStream = response.GetResponseStream();
+            var image = Image.FromStream(receiveStream);
+
+            Console.WriteLine(image.Width);
+            pB1.Image = image;
         }
 
     }
