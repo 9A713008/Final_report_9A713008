@@ -63,7 +63,8 @@ namespace Final_report_9A713008
                 return;
             }
             // download 一張照片下來  
-            string url = m.data[12].link;
+            int randomNum = new Random().Next(52);
+            string url = m.data[randomNum].link;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream receiveStream = response.GetResponseStream();
@@ -71,6 +72,7 @@ namespace Final_report_9A713008
 
             Console.WriteLine(image.Width);
             pB1.Image = image;
+            
         }
 
     }
